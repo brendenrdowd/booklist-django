@@ -1,0 +1,44 @@
+{% include './partials/header.html' %}
+<h1>Books</h1>
+<p>Our library is user generated.</p>
+<!-- if user is logged in, add abook button -->
+{% if logged_in %}
+<a href="/books/new" class="btn btn-success">Add Book</a>
+{% else %}
+<div class="alert alert-warning">
+    <p class="mb-0">Please <a href="/" class="alert-link">log in</a> to add a book .</p>
+</div>
+{% endif %}
+<!-- else -->
+<hr class="my-3">
+{% if not books %}
+<div class="alert alert-warning">
+    <p>The Library is empty :(</p>
+</div>
+{% endif %}
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Publication Date</th>
+        <th></th>
+    </tr>
+    {% if books%}
+        {% for book in books%}
+        <tr>
+            <td class="align-middle">{{book.title}}</td>
+            <td class="align-middle">{{book.author}}</td>
+            <td class="align-middle">{{book.isbn}}</td>
+            <td class="align-middle">{{book.publication_date|date:"F j, Y"}}</td>
+            <!-- add button -->
+            {% if logged_in %}
+            <td class="align-middle"><a href="/books/add/{{book.id}}" class="btn btn-success">Add</a></td>
+            {% else %}
+            <td class="align-middle"><a href="/" class="btn btn-warning">Login To Add</a></td>
+            {%endif %}
+        </tr>
+        {% endfor %}
+    {% endif %}
+</table>
+{% include './partials/footer.html' %}

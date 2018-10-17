@@ -1,0 +1,40 @@
+{% include './partials/header.html' %}
+<h1>Welcome, {{name}}. <small>Here's what's on Your List</small></h1>
+<p>Our library is user generated.</p>
+<a href="/books/library" class="btn btn-primary">View Library</a>
+<a href="/books/new" class="btn btn-success">Add Book to Library</a>
+<hr class="my-3">
+{% if not list %}
+<div class="alert alert-warning">
+    <p>Your List is empty, visit the library to add a book.</p>
+</div>
+{% endif %}
+{% if messages %}
+<div class="alert alert-warning">
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+</div>
+{% endif %}
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>ISBN</th>
+        <th>Publication Date</th>
+        <th></th>
+    </tr>
+    {% if list %}
+    {% for book in list %}
+    <tr>
+        <td class="align-middle">{{book.title}}</td>
+        <td class="align-middle">{{book.author}}</td>
+        <td class="align-middle">{{book.isbn}}</td>
+        <td class="align-middle">{{book.publication_date|date:"F j, Y"}}</td>
+        <!-- remove button -->
+        <td class="align-middle"><a href="/book/remove/{{book.id}}" class="btn btn-danger"></a>Remove</td> 
+    </tr>
+    {% endfor %}
+    {% endif %}
+</table>
+{% include './partials/footer.html' %}

@@ -1,0 +1,59 @@
+{% include './partials/header.html' %}
+<div class="jumbotron">
+    <h1>welcome</h1>
+    <p class="lead">Update and Manage your reading list with ease with BookList<small>&copy;</small>!</p>
+</div>
+{% if messages %}
+<div class="alert alert-danger">
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+</div>
+{% endif %}
+<div class="row">
+    <div class="col s12 m6">
+        <h3 class="text-center">Register</h3>
+        <form action="/register" method="POST">
+            {% csrf_token %}
+            <div class="row">
+                <div class="form-group col m6">
+                    <label class="col-form-label" for="fname">First Name</label>
+                    <input type="text" class="form-control" name="fname" id="fname">
+                </div>
+                <div class="form-group col m6">
+                    <label class="col-form-label" for="lname">Last Name</label>
+                    <input type="text" class="form-control" name="lname" id="lname">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="nemail">Email</label>
+                <input type="email" class="form-control" name="nemail" id="nemail">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="npassword">Password</label>
+                <input type="password" class="form-control" name="npassword" id="npassword">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="password">Confirm Password</label>
+                <input type="password" class="form-control" name="confirm" id="confirm">
+            </div>
+            <input type="submit" class="btn btn-success" value="Register">
+        </form>
+    </div>
+    <div class="col s12 m6">
+        <h3 class="text-center">Login</h3>
+        <form action="/login" method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="col-form-label" for="email">Email</label>
+                <input type="email" class="form-control" name="email" id="email">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="password">Password</label>
+                <input type="password" class="form-control" name="password" id="password">
+            </div>
+            <input type="submit" class="btn btn-success" justify-content-end"" value="Login">
+        </form>
+    </div>
+</div>
+{% include './partials/footer.html' %}
